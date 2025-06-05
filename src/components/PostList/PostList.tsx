@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-// короче хотел добавить автоперевод постов(сразу как грузится страница а не по запросу) но у меня нифига не получилось через google-translate-api-x
-// вылазила ошибка Failed to fetch это типо из за санкций что у нас половина заблокированно или из за чего
-// а разбиратся с Yandex Translate API пока не захотел(пока)
+
+
 type Post = {
     id: number;
     title: string;

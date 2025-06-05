@@ -1,16 +1,19 @@
-import styles from "./H3.module.css"
+import styles from "./UserCard.module.css"
+import type { User } from "../../Types/Index.ts"
+import {UserDetailsSwitch} from "../UserDetailsSwitch/UserDetailsSwitch.tsx"
 
-type User = {
-    id: number;
-    name: string;
-    email: string;
-};
 
 export function UserCard({ user }: { user: User }) {
+
+
     return (
-        <div>
-            <h3 className={styles.sexyColor}>{user.name}</h3>
-            <p>{user.email}</p>
+
+        <div className={styles.cardContainer}>
+
+            <h3>Имя:   {user.name}</h3>
+            <p>Емайл:   {user.email}</p>
+            <UserDetailsSwitch user={user}/>
+
         </div>
     )
-};
+}

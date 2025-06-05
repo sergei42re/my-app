@@ -1,11 +1,7 @@
-import { useEffect, useState } from "react";
-import {UserCard} from "../UserCard/UserCard.tsx";
-
-type User = {
-    id: number;
-    name: string;
-    email: string;
-};
+import { useEffect, useState } from "react"
+import {UserCard} from "../UserCard/UserCard.tsx"
+import type { User } from "../../Types/Index.ts"
+import styles from "./UserList.module.css"
 
 export function UserList() {
     const [users, setUsers] = useState< User[] | null >(null);
@@ -32,10 +28,10 @@ export function UserList() {
     if (!users) return <p>Нет данных</p>
 
     return (
-        <div>
+        <div className={styles.gridContainer}>
             {users.map((user) => (
                 <UserCard key={user.id} user={user} />
                 ))}
         </div>
     )
-};
+}
