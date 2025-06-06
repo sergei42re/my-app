@@ -1,5 +1,9 @@
 import type { User } from "../../Types/Index.ts"
 import {useState} from "react";
+import styles from "./UserDetailsSwitch.module.css"
+// написание css стилей мне помогал AI, просто станартное типо margin padding color и т.п. я помню
+// а вот всякие position z-index уже подзабыл...
+
 
 export function UserDetailsSwitch({ user }: { user: User }) {
     const [showDetalis, setShowDetalis] = useState(false);
@@ -15,13 +19,17 @@ export function UserDetailsSwitch({ user }: { user: User }) {
         </button>
 
     {showDetalis && (
-        <div>
+        <div className={styles.modalOverlay}>
         <p>Имя пользователя:  {user.username}</p>
         <p>Город:  {user.address.city}</p>
         <p>Улица:  {user.address.street}</p>
         <p>Номер телефона:  {user.phone}</p>
         <p>Вебсайт:  {user.website}</p>
         <p>Название компании:  {user.company.name}</p>
+
+            <button onClick={switchDetalis} className={styles.modalCloseBtn}>
+                Закрыть
+            </button>
         </div>
     )}
 
