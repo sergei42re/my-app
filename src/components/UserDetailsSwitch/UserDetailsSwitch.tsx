@@ -19,7 +19,7 @@ export function UserDetailsSwitch({ user }: { user: User }) {
         </button>
 
     {showDetalis && (
-        <div className={styles.modalOverlay}>
+        <div className={styles.modalWind}>
         <p>Имя пользователя:  {user.username}</p>
         <p>Город:  {user.address.city}</p>
         <p>Улица:  {user.address.street}</p>

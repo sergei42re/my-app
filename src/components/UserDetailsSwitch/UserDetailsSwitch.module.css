@@ -6,7 +6,7 @@
     cursor: pointer;
 }
 
-.modalOverlay {
+.modalWind {
     position: fixed;
     top: 0;
     left: 0;
