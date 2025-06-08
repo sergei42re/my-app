@@ -1,9 +1,15 @@
 import styles from "./UserCard.module.css";
 import type { User } from "../../Types/Index.ts";
 import {useToggleDetails} from "../../Hooks/useToggleDetails.ts";
-import { FavoriteButton} from "../FavoriteButton/FavoriteButton.tsx";
 
-export function UserCard({ user }: { user: User }) {
+type Props = {
+    user: User;
+    onAddToFavorites?: (user: User) => void;
+    onRemoveFromFavorites?: (user: User) => void;
+    isFavorite?: boolean;
+};
+
+export function UserCard({ user, onAddToFavorites,onRemoveFromFavorites, isFavorite }: Props) {
     const {showDetails, toggleDetails} = useToggleDetails();
 
     return (
@@ -12,12 +18,26 @@ export function UserCard({ user }: { user: User }) {
 
             <h3>Имя:   {user.name}</h3>
             <p>Емайл:   {user.email}</p>
-            <FavoriteButton user={user} />
 
 
             <button onClick={toggleDetails}>
                 {showDetails ? 'Скрыть детали' : 'Показать детали'}
             </button>
+
+            {onAddToFavorites && !isFavorite && (
+                <button onClick={() => onAddToFavorites(user)}>
+                    Добавить в избранное
+                </button>
+            )}
+
+            {onRemoveFromFavorites && isFavorite && (
+                <button onClick={() => onRemoveFromFavorites(user)}>
+                    Удалить из избранных
+                </button>
+            )}
+
+            {isFavorite && <p>Уже в избранном</p>}
+
             {showDetails && (
                 <div className={styles.modalWind}>
                     <p>Имя пользователя:  {user.username}</p>
