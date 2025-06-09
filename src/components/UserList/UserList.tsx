@@ -8,17 +8,22 @@ export function UserList() {
     const [favorites, setFavorites] = useState<User[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState< string | null >(null);
+    const [hasLoadedFavorites, setHasLoadedFavorites] = useState(false);
+
 
     useEffect(() => {
         const storedFavorites = localStorage.getItem("favorites");
         if (storedFavorites) {
             setFavorites(JSON.parse(storedFavorites));
         }
+        setHasLoadedFavorites(true);
     }, []);
 
     useEffect(() => {
-        localStorage.setItem("favorites", JSON.stringify(favorites));
-    }, [favorites]);
+        if (hasLoadedFavorites) {
+            localStorage.setItem("favorites", JSON.stringify(favorites));
+        }
+    }, [favorites, hasLoadedFavorites]);
 
     useEffect(() => {
         fetch("https://jsonplaceholder.typicode.com/users")
@@ -67,14 +72,15 @@ export function UserList() {
     <h1>Избранные</h1>
     <div className={styles.gridContainer}>
         {favorites.map((user) => (
-            <div key={user.id}>
+
                 <UserCard
                     key={user.id}
                     user={user}
                     onRemoveFromFavorites={handleRemoveFromFavorites}
                     isFavorite={true}
+                    showFavoriteStatus={false}
                 />
-            </div>
+
         ))}
     </div>
 </div>

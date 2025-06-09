@@ -7,9 +7,10 @@ type Props = {
     onAddToFavorites?: (user: User) => void;
     onRemoveFromFavorites?: (user: User) => void;
     isFavorite?: boolean;
+    showFavoriteStatus?: boolean;
 };
 
-export function UserCard({ user, onAddToFavorites,onRemoveFromFavorites, isFavorite }: Props) {
+export function UserCard({ user, onAddToFavorites,onRemoveFromFavorites,showFavoriteStatus = true, isFavorite }: Props) {
     const {showDetails, toggleDetails} = useToggleDetails();
 
     return (
@@ -36,7 +37,7 @@ export function UserCard({ user, onAddToFavorites,onRemoveFromFavorites, isFavor
                 </button>
             )}
 
-            {isFavorite && <p>Уже в избранном</p>}
+            {isFavorite && showFavoriteStatus && <p>Уже в избранном</p>}
 
             {showDetails && (
                 <div className={styles.modalWind}>
